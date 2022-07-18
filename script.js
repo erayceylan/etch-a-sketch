@@ -12,4 +12,19 @@ for (let i = 0; i < 256; i++) {
 };
 
 console.log(pixels);
+
 pixels.forEach( pixel => {canvas.appendChild(pixel);});
+pixels.forEach( pixel => pixel.addEventListener('mouseover',mouseOver));
+pixels.forEach( pixel => pixel.addEventListener('mouseout',mouseOut));
+
+
+function mouseOver() {
+    this.style.transitionDuration ="0.05s"
+    this.style.backgroundColor = "white"
+}
+
+function mouseOut() {
+    this.style.transitionDuration ="0.5s"
+    this.style.backgroundColor ="green"
+}
+

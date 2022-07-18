@@ -45,7 +45,3 @@ body {
     border: 1px solid greenyellow;
     background-color: green;
 }
-
-.canvas div:hover {
-    background-color: white;
-}
