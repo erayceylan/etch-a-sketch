@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik+Moonrocks&display=swap');
+
+
+body {
+    margin: 0;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family:'Rubik Moonrocks', cursive;
+}
+
+.header,
+.footer {
+    text-align: center;
+    font-size: 64px;
+    padding: 16px;
+
+    color:wheat;
+    background-color: orangered;
+}
+
+.content {
+    flex:1;
+    display: flex;
+    align-items: center;
+}
+
+
+.canvas {
+    margin: 0 auto;
+    width: 256px;
+    height: 256px;
+    outline: 2px gold solid;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.canvas div {
+    box-sizing: border-box;
+    border: 1px solid greenyellow;
+    background-color: green;
+}
+
+.canvas div:hover {
+    background-color: white;
+}
