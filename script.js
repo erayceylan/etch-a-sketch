@@ -1,11 +1,19 @@
 /* Defining canvas */
 const canvas = document.querySelector(".canvas");
-
-/* Defining control options */
 const resolution = document.querySelectorAll("input[name='resolution']");
+const color = document.querySelectorAll(".canvascolor input[type='range']");
+
 resolution.forEach(option => option.addEventListener('change',updateCanvas));
+color.forEach(option => option.addEventListener('change',updateCanvasColor))
 
 initializeCanvas()
+
+function updateCanvasColor() {
+
+    let color = getCanvasColor();
+    let pixels = document.querySelectorAll('.canvas div')
+    pixels.forEach( pixel => {pixel.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;});
+}
 
 function updateCanvas() {
     
@@ -23,6 +31,7 @@ function initializeCanvas() {
 
     let pixels = createPixels();
     addPixels(pixels);
+    updateCanvasColor();
     addDrawing(pixels);
 }
 
@@ -67,7 +76,7 @@ function createPixels() {
         pixels[i] = document.createElement("div");
         pixels[i].style.width = `${512/pixelSize}px`;
         pixels[i].style.height = `${512/pixelSize}px`;
-        pixels[i].style.border = `greenyellow solid ${512/(pixelSize*32)}px`;
+        pixels[i].style.border = `rgba(128, 128, 128, 0.5) solid ${512/(pixelSize*32)}px`;
     }
 
     return pixels
@@ -86,11 +95,47 @@ function addDrawing(pixels) {
 }
 
 function mouseOver() {
-    this.style.transitionDuration ="0.0s"
-    this.style.backgroundColor = "white"
+
+    let color = getPenColor();
+    this.style.transitionDuration ="0.0s";
+    this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
 }
 
 function mouseOut() {
+
+    let color = getCanvasColor();
     this.style.transitionDuration ="0.5s"
-    this.style.backgroundColor ="green"
+    this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+}
+
+function getCanvasColor() {
+
+    /*
+    this function will:
+    -get canvas color slider values
+    -return a color object with r,g,b elements
+    */
+
+    let red = +document.querySelector('.canvascolor input[name="red"]').value;
+    let green = +document.querySelector('.canvascolor input[name="green"]').value;
+    let blue = +document.querySelector('.canvascolor input[name="blue"]').value;
+
+    let color = {r:red, g:green, b:blue};
+    return color;
+}
+
+function getPenColor() {
+
+    /*
+    this function will:
+    -get pen color slider values
+    -return a color object with r,g,b elements
+    */
+
+    let red = +document.querySelector('.pencolor input[name="red"]').value;
+    let green = +document.querySelector('.pencolor input[name="green"]').value;
+    let blue = +document.querySelector('.pencolor input[name="blue"]').value;
+
+    let color = {r:red, g:green, b:blue};
+    return color;
 }
