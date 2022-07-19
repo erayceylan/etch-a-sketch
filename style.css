@@ -16,7 +16,7 @@ body {
 .header,
 .footer {
     text-align: center;
-    font-size: 64px;
+    font-size: 32px;
     padding: 16px;
 
     color:wheat;
@@ -26,15 +26,19 @@ body {
 .content {
     flex:1;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 
+
+/*****************************/
+/* CANVAS */
+
 .canvas {
-    margin: 0 auto;
-    width: 256px;
-    height: 256px;
-    outline: 2px gold solid;
+    width: 512px;
+    height: 512px;
 
     display: flex;
     flex-wrap: wrap;
@@ -44,4 +48,23 @@ body {
     box-sizing: border-box;
     border: 1px solid greenyellow;
     background-color: green;
+}
+
+/****************************/
+/* RADIO BUTTON */
+
+input[name="resolution"] {
+    position: absolute;
+    left: -9000px;
+}
+
+input[name="resolution"] + label {
+    color: wheat;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 16px;
+}
+
+input[name="resolution"]:checked + label {
+    color: gold;
 }
