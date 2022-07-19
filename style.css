@@ -19,8 +19,13 @@ body {
     font-size: 32px;
     padding: 16px;
 
-    color:wheat;
+    color: wheat;
     background-color: orangered;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
 }
 
 .content {
@@ -37,6 +42,7 @@ body {
 /* CANVAS */
 
 .canvas {
+    border: 2px orangered solid;
     width: 512px;
     height: 512px;
 
@@ -46,25 +52,111 @@ body {
 
 .canvas div {
     box-sizing: border-box;
-    border: 1px solid greenyellow;
     background-color: green;
 }
 
 /****************************/
 /* RADIO BUTTON */
 
+.resolution-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
 input[name="resolution"] {
     position: absolute;
     left: -9000px;
+
+    cursor: pointer;
 }
 
 input[name="resolution"] + label {
     color: wheat;
 
     font-family: "Roboto Mono", monospace;
-    font-size: 16px;
+    font-size: 32px;
+
 }
 
 input[name="resolution"]:checked + label {
     color: gold;
+}
+
+/****************************/
+/* SLIDER */
+
+
+.slider {
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px 4px 4px 4px;
+    margin: 4px;
+
+    background-color: wheat;
+    color: orangered;
+    border: orangered 2px solid;
+    border-radius: 8px;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 2px;
+    height: 4px;
+}
+
+input[name="red"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+
+    border: 2px red solid;
+    background-color: white;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+input[name="red"]::-webkit-slider-thumb:hover {
+    background-color: red;
+}
+
+input[name="green"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+
+    border: 2px green solid;
+    background-color: white;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+input[name="green"]::-webkit-slider-thumb:hover {
+    background-color: green;
+}
+
+input[name="blue"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+
+    border: 2px blue solid;
+    background-color: white;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+input[name="blue"]::-webkit-slider-thumb:hover {
+    background-color: blue;
 }

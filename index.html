@@ -10,17 +10,55 @@
         <div class="page">
             <div class="header">
                 <div class="buttons">
-                    <div class="radio">
-                        <div clsss="radio-header">
+                    <div class="resolution">
+                        <div clsss="resolution-header">
                             resolution
                         </div>
-                        <div class="radio-butons">
+                        <div class="resolution-buttons">
                             <input id="16p" name="resolution" value="16" type="radio">
                             <label for="16p" name="resolution">16p</label>
                             <input id="32p" name="resolution" value="32" type="radio" checked>
                             <label for="32p" name="resolution">32p</label>
                             <input id="64p" name="resolution" value="64" type="radio">
                             <label for="64p" name="resolution">64p</label>
+                        </div>
+                    </div>
+                    <div class="canvascolor">
+                        <div clsss="canvas-header">
+                            canvas color
+                        </div>
+                        <div class="color-sliders">
+                            <div class="slider">
+                                <input type="range" name="red" min="0" max="255" value="255" oninput="canvasrednumber.innerHTML=this.value">
+                                <label id="canvasrednumber">255</label>
+                            </div>
+                            <div class="slider">
+                                <input type="range" name="green" min="0" max="255" value="255" oninput="canvasgreennumber.innerHTML=this.value">
+                                <label id="canvasgreennumber">255</label>
+                            </div>
+                            <div class="slider">
+                                <input type="range" name="blue" min="0" max="255" value="255" oninput="canvasbluenumber.innerHTML=this.value">
+                                <label id="canvasbluenumber">255</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pencolor">
+                        <div clsss="pen-header">
+                            pen color
+                        </div>
+                        <div class="color-sliders">
+                            <div class="slider">
+                                <input type="range" name="red" min="0" max="255" value="0" oninput="penrednumber.innerHTML=this.value">
+                                <label id="penrednumber">0</label>
+                            </div>
+                            <div class="slider">
+                                <input type="range" name="green" min="0" max="255" value="0" oninput="pengreennumber.innerHTML=this.value">
+                                <label id="pengreennumber">0</label>
+                            </div>
+                            <div class="slider">
+                                <input type="range" name="blue" min="0" max="255" value="0" oninput="penbluenumber.innerHTML=this.value">
+                                <label id="penbluenumber">0</label>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -67,6 +67,7 @@ function createPixels() {
         pixels[i] = document.createElement("div");
         pixels[i].style.width = `${512/pixelSize}px`;
         pixels[i].style.height = `${512/pixelSize}px`;
+        pixels[i].style.border = `greenyellow solid ${512/(pixelSize*32)}px`;
     }
 
     return pixels
@@ -85,7 +86,7 @@ function addDrawing(pixels) {
 }
 
 function mouseOver() {
-    this.style.transitionDuration ="0.05s"
+    this.style.transitionDuration ="0.0s"
     this.style.backgroundColor = "white"
 }
 
@@ -93,4 +94,3 @@ function mouseOut() {
     this.style.transitionDuration ="0.5s"
     this.style.backgroundColor ="green"
 }
-
