@@ -1,10 +1,12 @@
-/* Defining canvas */
+
 const canvas = document.querySelector(".canvas");
 const resolution = document.querySelectorAll("input[name='resolution']");
 const color = document.querySelectorAll(".canvascolor input[type='range']");
+const rainbow = { h:0, s:100, l:50};
+let draw = false;
 
-resolution.forEach(option => option.addEventListener('change',updateCanvas));
-color.forEach(option => option.addEventListener('change',updateCanvasColor))
+resolution.forEach(option => option.addEventListener('input',updateCanvas));
+color.forEach(option => option.addEventListener('input',updateCanvasColor));
 
 initializeCanvas()
 
@@ -12,6 +14,7 @@ function updateCanvasColor() {
 
     let color = getCanvasColor();
     let pixels = document.querySelectorAll('.canvas div')
+    pixels.forEach( pixel => {pixel.style.transitionDuration = "0.0s"})
     pixels.forEach( pixel => {pixel.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;});
 }
 
@@ -92,20 +95,55 @@ function addDrawing(pixels) {
 
     pixels.forEach( pixel => pixel.addEventListener('mouseover',mouseOver));
     pixels.forEach( pixel => pixel.addEventListener('mouseout',mouseOut));
+    pixels.forEach( pixel => pixel.addEventListener('mousedown',()=>{draw = true;}));
+    pixels.forEach( pixel => pixel.addEventListener('mouseup',()=>{draw = false;}));
+
+
 }
 
 function mouseOver() {
 
-    let color = getPenColor();
-    this.style.transitionDuration ="0.0s";
-    this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    /*
+    this function will:
+    -change the background of mouseover pixel according to pen mode
+    */
+    
+    let penmode = document.querySelector('input[name="penmode"]:checked').value;
+
+    if (penmode === "trail") {
+        let color = getPenColor();
+        this.style.transitionDuration ="0.0s";
+        this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+
+    } else if (penmode === "rainbow") {
+        this.style.transitionDuration ="0.0s";
+        this.style.backgroundColor = `hsl(${rainbow.h%360}, ${rainbow.s}%, ${rainbow.l}%)`;
+        rainbow.h += 10;
+    } else if (penmode ==="draw" && draw) {
+        let color = getPenColor();
+        this.style.transitionDuration ="0.0s";
+        this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    } else if (penmode ==="erase" && draw) {
+        let color = getCanvasColor();
+        this.style.transitionDuration ="0.0s";
+        this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    }
 }
 
 function mouseOut() {
 
-    let color = getCanvasColor();
-    this.style.transitionDuration ="0.5s"
-    this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    /*
+    this function will:
+    -change the background of mouseout pixel according to pen mode
+    */
+    
+    let penmode = document.querySelector('input[name="penmode"]:checked').value;
+
+    if (penmode === "trail" || penmode === "rainbow") {
+        let color = getCanvasColor();
+        this.style.transitionDuration ="0.5s"
+        this.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    } else return;
 }
 
 function getCanvasColor() {
@@ -139,3 +177,13 @@ function getPenColor() {
     let color = {r:red, g:green, b:blue};
     return color;
 }
+
+
+/*
+#rainbow:checked + label {
+    background-image: gradient(to right,red,orangered,orange,gold, yellow,greenyellow,green);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color:transparent;
+}
+*/

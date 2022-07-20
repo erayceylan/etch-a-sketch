@@ -24,8 +24,8 @@ body {
 }
 
 .buttons {
-    display: flex;
-    justify-content: space-around;
+    display:flex;
+    justify-content: space-evenly;
 }
 
 .content {
@@ -55,7 +55,7 @@ body {
 }
 
 /****************************/
-/* RADIO BUTTON */
+/* RESOLUTION RADIO BUTTON */
 
 .resolution-buttons {
     display: flex;
@@ -82,7 +82,7 @@ input[name="resolution"]:checked + label {
 }
 
 /****************************/
-/* SLIDER */
+/* COLOR SLIDER */
 
 
 .slider {
@@ -158,4 +158,75 @@ input[name="blue"]::-webkit-slider-thumb {
 
 input[name="blue"]::-webkit-slider-thumb:hover {
     background-color: blue;
+}
+
+/****************************/
+/* PENMODE RADIO BUTTON */
+
+.penmode-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+input[name="penmode"] {
+    position: absolute;
+    left: -9000px;
+
+    cursor: pointer;
+}
+
+input[name="penmode"] + label {
+    color: wheat;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 24px;
+
+}
+
+input[name="penmode"]:checked + label {
+    color: gold;
+}
+
+input[name="penmode"]:checked + label #r {
+    color:red;
+}
+input[name="penmode"]:checked + label #a {
+    color:orange
+}
+input[name="penmode"]:checked + label #i {
+    color:yellow;
+}
+input[name="penmode"]:checked + label #n {
+    color:lawngreen
+}
+input[name="penmode"]:checked + label #b {
+    color:dodgerblue;
+}
+input[name="penmode"]:checked + label #o {
+    color:darkblue;
+}
+input[name="penmode"]:checked + label #w {
+    color:purple;
+}
+
+/****************************/
+/* OPTION BUTTONS */
+
+.option-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    color: wheat;
+    background-color: orangered;
+    border: none;
+    padding: 0px;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 24px;
+}
+
+button:hover {
+    color: gold;
 }
