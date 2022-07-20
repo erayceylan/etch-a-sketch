@@ -13,11 +13,20 @@ body {
     font-family:'Rubik Moonrocks', cursive;
 }
 
-.header,
-.footer {
+.header {
     text-align: center;
     font-size: 32px;
     padding: 16px;
+
+    color: wheat;
+    background-color: orangered;
+}
+
+.footer {
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    font-size: 8px;
+    padding: 8px;
 
     color: wheat;
     background-color: orangered;

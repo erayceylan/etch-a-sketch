@@ -5,7 +5,8 @@ const color = document.querySelectorAll(".canvascolor input[type='range']");
 const rainbow = { h:0, s:100, l:50};
 let draw = false;
 
-resolution.forEach(option => option.addEventListener('input',updateCanvas));
+canvas.addEventListener('mouseout',() => draw = false);
+resolution.forEach(option => option.addEventListener('input',resetCanvas));
 color.forEach(option => option.addEventListener('input',updateCanvasColor));
 
 initializeCanvas()
@@ -18,7 +19,7 @@ function updateCanvasColor() {
     pixels.forEach( pixel => {pixel.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;});
 }
 
-function updateCanvas() {
+function resetCanvas() {
     
     removePixels()
     initializeCanvas()
@@ -31,11 +32,12 @@ function initializeCanvas() {
     this function will:
     -uptade the pixels in the canvas
     */
-
+    
     let pixels = createPixels();
     addPixels(pixels);
+    addGrid()
+    addDrawing();
     updateCanvasColor();
-    addDrawing(pixels);
 }
 
 function addPixels(pixels) {
@@ -79,13 +81,12 @@ function createPixels() {
         pixels[i] = document.createElement("div");
         pixels[i].style.width = `${512/pixelSize}px`;
         pixels[i].style.height = `${512/pixelSize}px`;
-        pixels[i].style.border = `rgba(128, 128, 128, 0.5) solid ${512/(pixelSize*32)}px`;
     }
 
     return pixels
 }
 
-function addDrawing(pixels) {
+function addDrawing() {
 
     /*
     this function will:
@@ -93,12 +94,12 @@ function addDrawing(pixels) {
     -add mouseout event listener to the canvas pizels
     */
 
+    let pixels = document.querySelectorAll('.canvas div');
+
     pixels.forEach( pixel => pixel.addEventListener('mouseover',mouseOver));
     pixels.forEach( pixel => pixel.addEventListener('mouseout',mouseOut));
     pixels.forEach( pixel => pixel.addEventListener('mousedown',()=>{draw = true;}));
     pixels.forEach( pixel => pixel.addEventListener('mouseup',()=>{draw = false;}));
-
-
 }
 
 function mouseOver() {
@@ -130,13 +131,14 @@ function mouseOver() {
     }
 }
 
-function mouseOut() {
+function mouseOut(e) {
 
     /*
     this function will:
     -change the background of mouseout pixel according to pen mode
     */
-    
+
+    e.stopPropagation()
     let penmode = document.querySelector('input[name="penmode"]:checked').value;
 
     if (penmode === "trail" || penmode === "rainbow") {
@@ -178,12 +180,16 @@ function getPenColor() {
     return color;
 }
 
+function addGrid() {
 
-/*
-#rainbow:checked + label {
-    background-image: gradient(to right,red,orangered,orange,gold, yellow,greenyellow,green);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color:transparent;
+    let pixelSize = +document.querySelector('input[name="resolution"]:checked').value;
+    let pixels = document.querySelectorAll('.canvas div')
+    pixels.forEach( pixel => {pixel.style.border = `rgba(128, 128, 128, 0.5) solid ${512/(pixelSize*32)}px`;});
+
 }
-*/
+
+function removeGrid() {
+
+    let pixels = document.querySelectorAll('.canvas div')
+    pixels.forEach( pixel => {pixel.style.border = "hidden";});
+}
